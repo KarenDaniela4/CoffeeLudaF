@@ -4,14 +4,14 @@ import api from '../api/client';
 /**
  * AuthContext — estado global de autenticación.
  * 
- * Reemplaza al uso de $_SESSION del proyecto PHP original.
- * 
+  
  * Expone:
- *   usuario   — objeto con { id, email, id_rol, nombre, ... } o null
- *   cargando  — true mientras se valida el token al arrancar
- *   login     — función async (email, password) → hace POST /auth/login
- *   logout    — limpia token y estado
- *   esAdmin   — boolean helper
+ *   usuario           — objeto con { id, email, id_rol, nombre, ... } o null
+ *   cargando          — true mientras se valida el token al arrancar
+ *   login             — función async (email, password) → hace POST /auth/login
+ *   logout            — limpia token y estado
+ *   actualizarPerfil  — función async (datos) → hace PUT /auth/yo y refresca el estado
+ *   esAdmin           — boolean helper
  * 
  * Se usa desde cualquier componente con:
  *   const { usuario, login, logout } = useAuth();
@@ -60,11 +60,26 @@ export function AuthProvider({ children }) {
     setUsuario(null);
   };
 
+  /**
+   * Actualiza el perfil del usuario autenticado (PUT /auth/yo) y refresca
+   * el estado local + localStorage para que el cambio sea visible en toda
+   * la app sin necesidad de recargar.
+   */
+  const actualizarPerfil = async (datos) => {
+    const { data } = await api.put('/auth/yo', datos);
+    
+    const actualizado = { ...usuario, ...data.usuario };
+    localStorage.setItem('usuario', JSON.stringify(actualizado));
+    setUsuario(actualizado);
+    return actualizado;
+  };
+
   const valor = {
     usuario,
     cargando,
     login,
     logout,
+    actualizarPerfil,
     esAdmin: usuario?.id_rol === 1,
     estaLogueado: usuario !== null,
   };

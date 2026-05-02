@@ -4,18 +4,17 @@ import { useAuth } from '../contexts/AuthContext';
 
 /**
  * Página Menú — listado público de productos.
- * 
- * Reemplaza a menu.php + js/app.js del original.
- * Mejora clave: los productos vienen de la API real (antes estaban hardcoded
- * en el JavaScript del cliente, aunque existía la tabla en la DB).
+
  */
 
-// Mapeo de nombres de producto a imágenes. Mismo criterio que el app.js original.
+// Mapeo de nombres de producto a imágenes.
 // Si un producto no está en el mapa, usamos una imagen por defecto.
 const IMAGENES_PRODUCTO = {
   'Espresso':  'espresso.jpg',
   'Capuccino': 'capuccino.jpg',
   'Café Latte':     'latte.jpg',
+  'Postre': 'postre.jpg',
+  'Chocolate': 'chocolate.jpg'
 };
 
 function obtenerImagen(nombreProducto) {
@@ -23,7 +22,7 @@ function obtenerImagen(nombreProducto) {
   return `/images/${archivo}`;
 }
 
-// Formateo de precio en pesos colombianos (el original mostraba "$7000")
+// Formateo de precio en pesos colombianos
 function formatearPrecio(precio) {
   return `$${Number(precio).toLocaleString('es-CO')}`;
 }
@@ -34,7 +33,7 @@ export default function Menu() {
   const { usuario, esAdmin } = useAuth();
 
   // Handler: agrega al carrito. Si no está logueado le permitimos igual
-  // (el original también permitía carrito sin sesión).
+  
   const manejarAgregar = (producto) => {
     agregar(producto);
     // Feedback simple. Se puede reemplazar por un toast más lindo después.

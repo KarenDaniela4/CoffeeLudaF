@@ -4,15 +4,15 @@ import { useAuth } from '../contexts/AuthContext';
 
 /**
  * Página del carrito.
- * 
- * Reemplaza carrito.php + js/carrito.js. 
- * Usa useCart() (Context) para estado persistido en localStorage.
+ 
  */
 
 const IMAGENES_PRODUCTO = {
   'Espresso':  'espresso.jpg',
   'Capuccino': 'capuccino.jpg',
   'Café Latte':     'latte.jpg',
+  'Chocolate': 'chocolate.jpg',
+  'Postre': 'postre.jpg'
 };
 
 function imagenProducto(nombre) {
@@ -36,7 +36,7 @@ export default function Carrito() {
       return;
     }
 
-    // Guardamos el resumen del pedido en sessionStorage, igual que el original.
+    // Guardamos el resumen del pedido en sessionStorage.
     // Pago.jsx lo lee de ahí. Usamos session (no local) porque es temporal al checkout.
     const pedidoPendiente = {
       items: items.map((i) => ({

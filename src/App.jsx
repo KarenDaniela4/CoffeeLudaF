@@ -14,6 +14,7 @@ import Carrito from './pages/Carrito.jsx';
 import Pago from './pages/Pago.jsx';
 import Confirmacion from './pages/Confirmacion.jsx';
 import MisCompras from './pages/MisCompras.jsx';
+import MiPerfil from './pages/MiPerfil.jsx';
 
 // Páginas de admin
 import GestionProductos from './pages/admin/GestionProductos.jsx';
@@ -36,6 +37,7 @@ import EditarPedido from './pages/admin/EditarPedido.jsx';
  *   pago.php                    → /pago          (requiere login)
  *   confirmacion.php            → /confirmacion  (requiere login)
  *   mis_compras.php             → /mis-compras   (requiere login)
+ *   (nuevo)                     → /mi-perfil     (requiere login)
  *   productosform.php           → /admin/productos
  *   RegistrarProducto.php       → /admin/productos/nuevo
  *   EditarProducto.php          → /admin/productos/:id/editar
@@ -61,6 +63,7 @@ export default function App() {
           <Route path="/pago"          element={<Pago />} />
           <Route path="/confirmacion"  element={<Confirmacion />} />
           <Route path="/mis-compras"   element={<MisCompras />} />
+          <Route path="/mi-perfil"     element={<MiPerfil />} />
         </Route>
 
         {/* Solo admin (id_rol=1) */}
