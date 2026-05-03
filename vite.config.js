@@ -15,7 +15,7 @@ export default defineConfig({
     // comenta este bloque y define VITE_API_URL en el archivo .env
     proxy: {
       '/api': {
-        target: 'http://localhost/CoffeeLuda-React/backend',
+        target: '[http://coffeeludab.great-site.net](http://coffeeludab.great-site.net)',
         changeOrigin: true,
         secure: false,
       }
