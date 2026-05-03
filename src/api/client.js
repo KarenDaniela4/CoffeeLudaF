@@ -18,7 +18,7 @@ import axios from 'axios';
 // En desarrollo, Vite proxea /api hacia el backend PHP (ver vite.config.js),
 // así que con baseURL = '/api' funciona. En producción, apuntar al dominio real.
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://coffeeludab.great-site.net/api/index.php',
   headers: {
     'Content-Type': 'application/json',
   },
